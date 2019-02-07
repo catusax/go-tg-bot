@@ -3,7 +3,7 @@ package handle
 import (
 	"fmt"
 	"log"
-	"github.com/go-tg-bot/tuling"
+	"github.com/coolrc136/go-tg-bot/tuling"
 	"github.com/go-telegram-bot-api/telegram-bot-api"
 )
 

@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/go-tg-bot/cmd"
-	. "github.com/go-tg-bot/handle"
+	"github.com/coolrc136/go-tg-bot/cmd"
+	. "github.com/coolrc136/go-tg-bot/handle"
 	"log"
 	"net/http"
 

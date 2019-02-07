@@ -1,7 +1,7 @@
 package tuling
 
 import (
-	"github.com/go-tg-bot/cmd"
+	"github.com/coolrc136/go-tg-bot/cmd"
 	"bytes"
 	"encoding/json"
 	"fmt"
