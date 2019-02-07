@@ -6,7 +6,11 @@ telegram bot build with golang
 如果需要使用自签名证书，请参考go-telegram-bot-api/telegram-bot-api修改代码
 
 # 编译运行
-将项目放入`GOPATH`的`src`目录下，运行`CGO_ENABLED=0 go build`编译生成二进制文件
+```
+go get github.com/coolrc136/go-tg-bot
+go build github.com/coolrc136/go-tg-bot
+```
+
 可以使用help参数查看使用说明
 
 ```
