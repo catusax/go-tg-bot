@@ -1,24 +1,21 @@
 language: go
-
 go: 1.x
-
 install:
-  - go get ./...
-
+- go get ./...
 script:
-  - CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o tgbot_linux_64
-  - CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -o tgbot_linux_32
-  - CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o tgbot_windows_64.exe
-  - CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -o tgbot_windows_32.exe
-
+- CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o tgbot_linux_64
+- CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -o tgbot_linux_32
+- CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o tgbot_windows_64.exe
+- CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -o tgbot_windows_32.exe
 deploy:
-  provider: release
-  api_key: $release_key
-  file:
+  provider: releases
+  api_key:
+    secure: heleA4koQc63RcdhRKZ2OJRPFfoJFvmFtS9vD28cWkhXPf3dXo0t/82Zj5G97wnFk/IEhNWEF9EZIqbs0aRGnsRzDtszpQC2HSruvLoPclReQShziw9tLwtqYv4+HtVBFRYBIo4OzstYCWVARZJeDPMeBGpEiq7RE5T613aPlYUY8ZTGd7tbaJmXzNwpwCa9r/1DIYvx8q1LGEm9OMPHK3eAlVcF1Nw7yawb4CwTQ0iZyIukSGubwDZvBDJ2i6Cwv8QHRTxs7tu9bw+YoaCME06qp42+toP0GQuupgAul9eUqABaTpGDnSXsSeCqTpVIMOKu7uimX3PW1dkhve3qDYMwgnuWamkdzrP5SP/w5xhhyWLPgxEc4fACy2uwNp5cPL7pvfj2RyD3UxZsK3ElIgL25E8uQQc5whs0evrqlm+btcK8hsa/UE+Leln1sMJBGrtLG0wvsea94jY+eYlaDX2AoxqfI1RxfTTaSjtvZswb5cg2nMxGzCU604bV6KTHaYvpghQhgLfVcyz3lIXEj+YY+x5a4BQnlAE5KufYKtWRrnHUVpU2y9Lzvj3wRW3nJx/zyp7pH2KCY5vnN4HJKkM7JMuIwlnXVGkrjJUO/OGM9KQLemP32B6rp5r+0FeJhLJhURrsJKjeqKdfaUjKvlMHTTBPoOAUHwotQ4qG2ps=
+    file:
     - tgbot_linux_64
     - tgbot_linux_32
     - tgbot_windows_64.exe
     - tgbot_windows_32.exe
-  skip_cleanup: true
   on:
+    repo: coolrc136/go-tg-bot
     tags: true
