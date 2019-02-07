@@ -1,0 +1,24 @@
+language: go
+
+go: 1.x
+
+install:
+  - go get ./...
+
+script:
+  - CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o tgbot_linux_64
+  - CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -o tgbot_linux_32
+  - CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o tgbot_windows_64.exe
+  - CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -o tgbot_windows_32.exe
+
+deploy:
+  provider: release
+  api_key: $release_key
+  file:
+    - tgbot_linux_64
+    - tgbot_linux_32
+    - tgbot_windows_64.exe
+    - tgbot_windows_32.exe
+  skip_cleanup: true
+  on:
+    tags: true
