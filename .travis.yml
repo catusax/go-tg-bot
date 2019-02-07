@@ -18,3 +18,4 @@ deploy:
     - tgbot_windows_32.exe
   on:
     repo: coolrc136/go-tg-bot
+    tags: true
