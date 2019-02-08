@@ -16,6 +16,7 @@ deploy:
     - tgbot_linux_32
     - tgbot_windows_64.exe
     - tgbot_windows_32.exe
+    skip_cleanup: true
   on:
     repo: coolrc136/go-tg-bot
     tags: true
