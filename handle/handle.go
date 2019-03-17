@@ -5,6 +5,7 @@ import (
 	"log"
 	"github.com/coolrc136/go-tg-bot/tuling"
 	"github.com/go-telegram-bot-api/telegram-bot-api"
+    "github.com/coolrc136/go-tg-bot/dialogflow"
 )
 
 func Handle(updates *tgbotapi.UpdatesChannel,bot *tgbotapi.BotAPI) {
@@ -24,9 +25,17 @@ func Handle(updates *tgbotapi.UpdatesChannel,bot *tgbotapi.BotAPI) {
 				msg.Text = "I don't know that command"
 			}
 
-		} else {
-			msg.Text = tuling.Tuling(update.Message.Text, fmt.Sprintf("%d", update.Message.Chat.ID))
-		}
+		} else 
+        
+        {
+            dfresponse := dp.processNLP(update.Message.Text, fmt.Sprintf("%d", update.Message.Chat.ID))
+            if dfresponse.Intent != "Default Fallback Intent" {
+                msg.Text = dfresponse.Result
+            }
+            else {
+                msg.Text = tuling.Tuling(update.Message.Text, fmt.Sprintf("%d", update.Message.Chat.ID))
+            }
+        }
 
 		if _, err := bot.Send(msg); err != nil {
 			log.Panic(err)

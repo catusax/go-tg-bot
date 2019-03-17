@@ -17,3 +17,6 @@
 
 # bin
 go-tg-bot
+
+# json
+newagent*.json
