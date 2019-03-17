@@ -5,7 +5,7 @@ import (
         "fmt"
         "log"
         "strconv"
-        "io/ioutil"
+        "os"
         "encoding/json"
 
         dialogflow "cloud.google.com/go/dialogflow/apiv2"
@@ -41,8 +41,7 @@ func init(){
     }
 
 	jsonParser := json.NewDecoder(configFile)
-	var dfconfig DfConfig
-    if err = jsonParser.Decode(&df); err != nil {
+    if err = jsonParser.Decode(&dp); err != nil {
         printError("parsing config file", err.Error())
     }
 
