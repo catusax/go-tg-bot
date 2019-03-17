@@ -10,13 +10,10 @@ RUN apk --no-cache add git \
 
 FROM alpine
 
-ENV TOKEN "your_token"
-ENV SERVER "https://youserver.com:8443"
-ENV TULING "afafw"
 
 COPY --from=0 /go/src/go-tg-bot/go-tg-bot /bot/
 
 RUN apk upgrade && apk add --no-cache ca-certificates
 
-CMD cd /bot && /bot/go-tg-bot -n=true -server=$SERVER -token=$TOKEN -tuling=$TULING
+CMD cd /bot && /bot/go-tg-bot
 EXPOSE 8443
