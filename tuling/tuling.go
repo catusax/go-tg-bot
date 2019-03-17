@@ -1,7 +1,7 @@
 package tuling
 
 import (
-	"github.com/coolrc136/go-tg-bot/cmd"
+	"github.com/coolrc136/go-tg-bot/config"
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -22,7 +22,7 @@ type Answer struct { //接收的回答
 func Tuling(info string, userid string) string {
 
 	var post PostMsg
-	post.Key = *cmd.Tuling_token
+	post.Key = config.Tuling_token
 	post.Info = info
 	post.Userid = userid
 	msg, _ := json.Marshal(post)

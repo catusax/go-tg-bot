@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/coolrc136/go-tg-bot/cmd"
+	"github.com/coolrc136/go-tg-bot/config"
 	. "github.com/coolrc136/go-tg-bot/handle"
 	"log"
 	"net/http"
@@ -13,7 +13,8 @@ import (
 
 
 func main() {
-	bot, err := tgbotapi.NewBotAPI(*cmd.Token)
+    config.ReadConf()
+	bot, err := tgbotapi.NewBotAPI(config.Token)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -22,12 +23,11 @@ func main() {
 
 	log.Printf("Authorized on account %s", bot.Self.UserName)
 
-	if *cmd.Sethook {
-		_, err = bot.SetWebhook(tgbotapi.NewWebhook(*cmd.Webhook + bot.Token))
-		if err != nil {
-			log.Fatal(err)
-		}
+	_, err = bot.SetWebhook(tgbotapi.NewWebhook(config.Webhook + bot.Token))
+	if err != nil {
+		log.Fatal(err)
 	}
+
 	info, err := bot.GetWebhookInfo()
 	if err != nil {
 		log.Fatal(err)
