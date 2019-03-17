@@ -5,8 +5,9 @@ import (
         "log"
         "github.com/coolrc136/go-tg-bot/tuling"
         "github.com/go-telegram-bot-api/telegram-bot-api"
-    "github.com/coolrc136/go-tg-bot/dialogflow"
+        df "github.com/coolrc136/go-tg-bot/dialogflow"
 )
+
 
 func Handle(updates *tgbotapi.UpdatesChannel,bot *tgbotapi.BotAPI) {
         for update := range *updates { //消息处理
@@ -26,11 +27,10 @@ func Handle(updates *tgbotapi.UpdatesChannel,bot *tgbotapi.BotAPI) {
                         }
 
                 } else {
-            		dfresponse := dp.processNLP(update.Message.Text, fmt.Sprintf("%d", update.Message.Chat.ID))
-            		if dfresponse.Intent != "Default Fallback Intent" {
-                		msg.Text = dfresponse.Result
-            		}
-            		else {
+            		intent,dfmsg :=df.Df(update.Message.Text, fmt.Sprintf("%d", update.Message.Chat.ID))
+            		if intent != "Default Fallback Intent" {
+                		msg.Text = dfmsg
+            		} else {
                 		msg.Text = tuling.Tuling(update.Message.Text, fmt.Sprintf("%d", update.Message.Chat.ID))
             		}
         		}
