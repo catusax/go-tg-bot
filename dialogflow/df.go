@@ -44,7 +44,7 @@ var dp DialogflowProcessor
 
 
 func init() {
-	configFile, err := os.Open("df.json")
+	configFile, err := os.Open("conf/df.json")
 if err != nil {
 	fmt.Printf("opening config file", err.Error())
 }

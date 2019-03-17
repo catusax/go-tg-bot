@@ -19,5 +19,5 @@
 go-tg-bot
 
 # json
-newagent*.json
+conf/newagent*.json
 test.json

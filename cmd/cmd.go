@@ -4,7 +4,7 @@ import (
     "os"
 )
 
-var ConfPath string = "config.json"
+var ConfPath string = "conf/config.json"
 
 func init(){
 
