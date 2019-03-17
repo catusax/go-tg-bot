@@ -22,7 +22,7 @@ go build github.com/coolrc136/go-tg-bot
 # docker
 
 ```
-docker run -itd --restart=always --name tgbot -p 8443:8443 -e \
+docker run -itd --restart=always --name tgbot -p 8443:8443 \
     -v $PWD/cert:/bot/cert \
     -v $PWD/conf:/bot/conf \
     coolrc/tgbot
