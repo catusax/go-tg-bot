@@ -37,12 +37,12 @@ var dp DialogflowProcessor
 func init(){
 	configFile, err := os.Open("df.json")
     if err != nil {
-        printError("opening config file", err.Error())
+        fmt.Printf("opening config file", err.Error())
     }
 
 	jsonParser := json.NewDecoder(configFile)
     if err = jsonParser.Decode(&dp); err != nil {
-        printError("parsing config file", err.Error())
+        fmt.Printf("parsing config file", err.Error())
     }
 
 	// Auth process: https://dialogflow.com/docs/reference/v2-auth-setup
