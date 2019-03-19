@@ -1,13 +1,16 @@
 package tuling
 
 import (
-	"github.com/coolrc136/go-tg-bot/config"
 	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 )
+
+type TulingApi struct {
+	Key string
+}
 
 type PostMsg struct { //post数据
 	Key    string `json:"key"`
@@ -19,10 +22,16 @@ type Answer struct { //接收的回答
 	Text string `json:"text"`
 }
 
-func Tuling(info string, userid string) string {
+func NewApi(key string) *TulingApi {
+	api := new(TulingApi)
+	api.Key = key
+	return api
+}
+
+func (tuling *TulingApi) GetMsg(info string, userid string) string {
 
 	var post PostMsg
-	post.Key = config.Tuling_token
+	post.Key = tuling.Key
 	post.Info = info
 	post.Userid = userid
 	msg, _ := json.Marshal(post)
@@ -45,8 +54,3 @@ func Tuling(info string, userid string) string {
 	fmt.Println(string(content))
 	return ans.Text
 }
-
-/*
-func main() {
-	fmt.Println(tuling(os.Args[1], "47725"))
-} */
