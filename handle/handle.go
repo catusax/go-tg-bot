@@ -3,13 +3,19 @@ package handle
 import (
         "fmt"
         "log"
+
         "github.com/coolrc136/go-tg-bot/tuling"
-        "github.com/go-telegram-bot-api/telegram-bot-api"
+        "github.com/coolrc136/go-tg-bot/config"
         df "github.com/coolrc136/go-tg-bot/dialogflow"
+
+        "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
-
 func Handle(updates *tgbotapi.UpdatesChannel,bot *tgbotapi.BotAPI) {
+        
+        //init
+        Tuling :=  tuling.NewApi(config.Tuling_token)
+
         for update := range *updates { //消息处理
                 log.Printf("%+v\n", update)
                 msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
@@ -31,7 +37,7 @@ func Handle(updates *tgbotapi.UpdatesChannel,bot *tgbotapi.BotAPI) {
             		if intent != "Default Fallback Intent" {
                 		msg.Text = dfmsg
             		} else {
-                		msg.Text = tuling.Tuling(update.Message.Text, fmt.Sprintf("%d", update.Message.Chat.ID))
+                		msg.Text = Tuling.GetMsg(update.Message.Text, fmt.Sprintf("%d", update.Message.Chat.ID))
             		}
         		}
 
