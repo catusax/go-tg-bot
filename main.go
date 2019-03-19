@@ -1,12 +1,11 @@
 package main
 
 import (
-	//"fmt"
-	"log"
-	//"net/http"
-
-	. "github.com/coolrc136/go-tg-bot/handle"
+	"fmt"
 	"github.com/coolrc136/go-tg-bot/config"
+	. "github.com/coolrc136/go-tg-bot/handle"
+	"log"
+	"net/http"
 
 	"github.com/go-telegram-bot-api/telegram-bot-api"
 )
@@ -24,26 +23,22 @@ func main() {
 
 	log.Printf("Authorized on account %s", bot.Self.UserName)
 
-	// _, err = bot.SetWebhook(tgbotapi.NewWebhook(config.Webhook + bot.Token))
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	_, err = bot.SetWebhook(tgbotapi.NewWebhook(config.Webhook + bot.Token))
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	// info, err := bot.GetWebhookInfo()
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// if info.LastErrorDate != 0 {
-	// 	log.Printf("Telegram callback failed: %s", info.LastErrorMessage)
-	// }
-	
-	u := tgbotapi.NewUpdate(0)
-	u.Timeout = 60
-	updates, err := bot.GetUpdatesChan(u)
+	info, err := bot.GetWebhookInfo()
+	if err != nil {
+		log.Fatal(err)
+	}
+	if info.LastErrorDate != 0 {
+		log.Printf("Telegram callback failed: %s", info.LastErrorMessage)
+	}
 
-	// updates := bot.ListenForWebhook("/" + bot.Token)
-	// go http.ListenAndServeTLS("0.0.0.0:8443", "cert/cert.pem", "cert/key.pem", nil)
-	// fmt.Println("listening")
+	updates := bot.ListenForWebhook("/" + bot.Token)
+	go http.ListenAndServeTLS("0.0.0.0:8443", "cert/cert.pem", "cert/key.pem", nil)
+	fmt.Println("listening")
 
 	Handle(&updates, bot)
 }
