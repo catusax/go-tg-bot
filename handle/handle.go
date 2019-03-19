@@ -15,9 +15,10 @@ func Handle(updates *tgbotapi.UpdatesChannel,bot *tgbotapi.BotAPI) {
         
         //init
         Tuling :=  tuling.NewApi(config.Tuling_token)
+        DfApi := df.NewDfApi(config.Projectid,config.Lang,config.Jsonfile)
 
         for update := range *updates { //消息处理
-                log.Printf("%+v\n", update)
+                //log.Printf("%+v\n", update)
                 msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
                 if update.Message.IsCommand() {
                         //解析命令
@@ -33,11 +34,14 @@ func Handle(updates *tgbotapi.UpdatesChannel,bot *tgbotapi.BotAPI) {
                         }
 
                 } else {
-            		intent,dfmsg :=df.Df(update.Message.Text, fmt.Sprintf("%d", update.Message.Chat.ID))
+                            intent,dfmsg :=DfApi.GetMsg(update.Message.Text, fmt.Sprintf("%d", update.Message.Chat.ID))
+                            fmt.Print("df returns :\n",intent)
             		if intent != "Default Fallback Intent" {
-                		msg.Text = dfmsg
+                                msg.Text = dfmsg
+                                fmt.Print("df returns :\n",msg.Text)
             		} else {
-                		msg.Text = Tuling.GetMsg(update.Message.Text, fmt.Sprintf("%d", update.Message.Chat.ID))
+                                msg.Text = Tuling.GetMsg(update.Message.Text, fmt.Sprintf("%d", update.Message.Chat.ID))
+                                fmt.Print("tuling returns :\n",msg.Text)
             		}
         		}
 
