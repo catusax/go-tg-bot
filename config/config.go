@@ -9,14 +9,15 @@ import (
 )
 
 type Conf struct {
-	Hook   string `json:"hook"`
-	Token  string `json:"token"`
-	Tuling string `json:"tuling"`
+	Hook      string `json:"hook"`
+	Token     string `json:"token"`
+	Tuling    string `json:"tuling"`
+	Projectid string `json:"projectid"`
+	Jsonfile  string `json:"jsonfile"`
+	Lang      string `json:"lang"`
 }
 
-var Token string
-var Webhook string
-var Tuling_token string
+var Token, Webhook, Tuling_token, Projectid, Jsonfile, Lang string
 
 func ReadConf() {
 	var Config Conf
@@ -32,4 +33,7 @@ func ReadConf() {
 	Token = Config.Token
 	Webhook = Config.Hook
 	Tuling_token = Config.Tuling
+	Projectid = Config.Projectid
+	Jsonfile = Config.Jsonfile
+	Lang = Config.Lang
 }
