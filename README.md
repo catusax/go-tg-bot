@@ -27,3 +27,7 @@ docker run -itd --restart=always --name tgbot -p 8443:8443 \
     -v $PWD/conf:/bot/conf \
     coolrc/tgbot
 ```
+
+# TODO
+
+[] 增加语音支持

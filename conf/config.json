@@ -1,6 +1,9 @@
 {
     "hook": "https://bot.coolrc.me:8443/",
     "token": "775353elKLd9XXhT-BN7GnPjc",
-    "tuling": "1cac81900f8e16b079"
+    "tuling": "1cac81900f8e16b079",
+    "projectid": "newagent-8c7ad",
+    "jsonfile": "conf/newagent-8c7ad-b39848d5c5ce.json",
+    "lang": "zh-CN"
 }
 
